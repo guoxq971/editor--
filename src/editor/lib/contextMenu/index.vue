@@ -6,8 +6,24 @@
         <div v-if="showMenu" class="context-menu" :style="{ left: x + 'px', top: y + 'px' }">
           <div class="menu-list">
             <!-- 添加菜单的点击事件 -->
-            <div @mousedown="handleClick(item)" class="menu-item" v-for="(item, i) in menu" :key="item.label">
-              {{ item.label }}
+            <div
+              @mousedown.stop="handleClick(item)"
+              @mouseenter="mouseenter(item)"
+              @mouseleave="mouseleave(item)"
+              class="menu-item"
+              v-for="(item, i) in menu"
+              :key="item.label"
+              :style="item.style || {}"
+            >
+              <span :style="item.labelStyle || {}">{{ item.label }}</span>
+              <span v-if="item.children" class="icon el-icon-arrow-right"></span>
+              <!--子菜单-->
+              <div class="menu-list child-menu-item" v-if="item === hoverItem && item.children">
+                <div @mousedown="handleClick(child)" class="menu-item" v-for="(child, i) in item.children" :key="child.label" :style="child.style || {}">
+                  <span>{{ child.label }}</span>
+                  <span v-if="child.children" class="icon el-icon-arrow-right"></span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -42,6 +58,15 @@ function handleClick(item) {
   // 并返回选中的菜单
   emit('select', item);
   item?.fn();
+}
+
+// 鼠标经过
+const hoverItem = ref(null);
+function mouseenter(item) {
+  hoverItem.value = item;
+}
+function mouseleave(item) {
+  hoverItem.value = null;
 }
 
 function handleBeforeEnter(el) {
@@ -81,11 +106,17 @@ function handleAfterEnter(el) {
       cursor: pointer;
       position: relative;
       font-family: sans-serif;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      .icon {
+        width: fit-content;
+      }
       &:hover {
         background: #f0f5ff;
       }
       span {
-        padding: 0 15px;
+        //padding: 0 15px;
         width: 100%;
         height: 32px;
         display: flex;
@@ -94,6 +125,18 @@ function handleAfterEnter(el) {
         color: rgba(0, 0, 0, 0.85);
         font-size: 14px;
       }
+    }
+
+    .child-menu-item {
+      background: #fff;
+      box-shadow:
+        0 9px 28px 8px rgba(0, 0, 0, 0.05),
+        0 6px 16px 0 rgba(0, 0, 0, 0.08),
+        0 3px 6px -4px rgba(0, 0, 0, 0.12);
+      position: absolute;
+      min-width: 200px;
+      top: 0;
+      right: -200px;
     }
   }
 }

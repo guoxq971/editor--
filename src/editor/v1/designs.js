@@ -1,5 +1,6 @@
 import Konva from 'konva';
 import lodash from 'lodash';
+import { nextTick } from 'vue';
 
 export function Designs(editor) {
   // bgColor
@@ -74,6 +75,7 @@ function editText(editor, design, attrs = {}, options = {}) {
   attrs = { ...attrs };
   attrs.fontStyle = [attrs.fontWeight, attrs.fontItalic].join(' ');
   design.node.setAttrs(lodash.omit(attrs, ['visible']));
+  design.fix(attrs);
 }
 
 // 添加文本
@@ -122,14 +124,24 @@ async function addText(editor, attrs = {}, options = {}) {
     template,
     group,
     node,
-    fix() {
-      node.setAttrs({
-        ...design.attrs,
+    fix(attrs = {}) {
+      attrs = { ...design.attrs, ...attrs };
+      // 创建一个临时的文字对象
+      let tempText = new Konva.Text({ ...attrs });
+      node.setAttrs({ width: tempText.width(), height: tempText.height() });
+      // 释放
+      tempText.destroy();
+      tempText = null;
+      // 设置偏移量
+      nextTick(() => {
+        node.setAttrs({ offsetX: node.width() / 2, offsetY: node.height() / 2 });
       });
     },
   };
+  // 设置偏移量
+  design.fix();
+  // 添加
   editor.designsOs.add(design);
-
   // 选中
   editor.selector.select(design);
   // 监听
@@ -141,7 +153,7 @@ async function addBgImage(editor) {
   const activeView = editor.actives.view;
   const template = editor.actives.template;
   for (const view of template.viewList) {
-    const parent = view.nodes.designGroup;
+    const parent = view.nodes.bgImageGroup;
     const uuid = editor.utils.uuid();
     const attrs = {
       x: 0,
@@ -153,6 +165,10 @@ async function addBgImage(editor) {
       fill: '#' + Math.floor(Math.random() * 16777215).toString(16),
       type: editor.config.getKey('design/type/bgImage'),
       uuid,
+      width: 100,
+      height: 100,
+      offsetX: 50,
+      offsetY: 50,
     };
     const group = new Konva.Group({
       type: attrs.type,
@@ -161,8 +177,6 @@ async function addBgImage(editor) {
       y: 0,
     });
     const node = new Konva.Rect({
-      width: 100,
-      height: 100,
       ...attrs,
       draggable: true,
     });
@@ -202,6 +216,10 @@ async function addImage(editor) {
     fill: '#' + Math.floor(Math.random() * 16777215).toString(16),
     type: editor.config.getKey('design/type/image'),
     uuid,
+    width: 100,
+    height: 100,
+    offsetX: 50,
+    offsetY: 50,
   };
   const group = new Konva.Group({
     type: attrs.type,
@@ -210,8 +228,6 @@ async function addImage(editor) {
     y: 0,
   });
   const node = new Konva.Rect({
-    width: 100,
-    height: 100,
     ...attrs,
     draggable: true,
   });
@@ -250,8 +266,35 @@ function listenDesign(editor, design) {
     // 右键
     const menu = [
       //
-      { label: 'visible', fn: () => editor.designsOs.visible(design) },
-      { label: 'remove', fn: () => editor.designsOs.remove(design) },
+      { label: '隐藏', fn: () => editor.designsOs.visible(design) },
+      { label: '删除', fn: () => editor.designsOs.remove(design), labelStyle: { color: 'red' } },
+      {
+        label: '翻转',
+        children: [
+          { label: '不翻转', fn: () => editor.designsOs.flip(design, '') },
+          { label: '水平翻转', fn: () => editor.designsOs.flip(design, 'x') },
+          { label: '垂直翻转', fn: () => editor.designsOs.flip(design, 'y') },
+        ],
+      },
+      {
+        label: '旋转',
+        children: [
+          { label: '旋转至0°', fn: () => editor.designsOs.rotation(design, 0) },
+          { label: '旋转至45°', fn: () => editor.designsOs.rotation(design, 45) },
+          { label: '旋转至90°', fn: () => editor.designsOs.rotation(design, 90) },
+          { label: '旋转至180°', fn: () => editor.designsOs.rotation(design, 180) },
+          { label: '旋转至270°', fn: () => editor.designsOs.rotation(design, 270) },
+        ],
+      },
+      {
+        label: '排序',
+        children: [
+          { label: '置顶', fn: () => editor.designsOs.moveToTop(design) },
+          { label: '置底', fn: () => editor.designsOs.moveDown(design) },
+          { label: '上移一层', fn: () => editor.designsOs.moveUp(design) },
+          { label: '下移一层', fn: () => editor.designsOs.moveToBottom(design) },
+        ],
+      },
     ];
     node.on('contextmenu', (e) => {
       editor.contextMenu.open(e.evt, menu);
@@ -270,7 +313,7 @@ function listenDesign(editor, design) {
   // 属性同步
   // 设计图 | 背景图
   if ([editor.config.getKey('design/type/image'), editor.config.getKey('design/type/bgImage')].includes(design.attrs.type)) {
-    const fields = ['x', 'y', 'scaleX', 'scaleY', 'rotation'];
+    const fields = ['x', 'y', 'scaleX', 'scaleY', 'rotation', 'offsetX', 'offsetY'];
     fields.forEach((field) => {
       node.on(`${field}Change`, (e) => (design.attrs[field] = lodash.round(e.newVal, 2)));
     });
@@ -278,13 +321,14 @@ function listenDesign(editor, design) {
   }
   // 文本
   else if ([editor.config.getKey('design/type/text')].includes(design.attrs.type)) {
-    const fields = ['x', 'y', 'scaleX', 'scaleY', 'rotation', 'fontSize'];
-    const fields2 = ['textDecoration', 'fill'];
+    const fields = ['x', 'y', 'scaleX', 'scaleY', 'rotation', 'fontSize', 'offsetX', 'offsetY'];
     fields.forEach((field) => {
       node.on(`${field}Change`, (e) => (design.attrs[field] = lodash.round(e.newVal, 2)));
     });
+
+    const fields2 = ['textDecoration', 'fill'];
     fields2.forEach((field) => {
-      node.on(`${field}Change`, (e) => (design.attrs['fill'] = e.newVal));
+      node.on(`${field}Change`, (e) => (design.attrs[field] = e.newVal));
     });
     node.on(`fontStyleChange`, (e) => {
       design.attrs['fontStyle'] = e.newVal;

@@ -74,6 +74,8 @@
           <div>y：{{ design.attrs.y }}</div>
           <div>rotation：{{ design.attrs.rotation }}</div>
           <div>scale：{{ design.attrs.scaleX }}</div>
+          <div>offsetX：{{ design.attrs.offsetX }}</div>
+          <div>offsetY：{{ design.attrs.offsetY }}</div>
           <div @click.stop="onVisible(design)">visible：{{ design.attrs.visible }}</div>
         </div>
       </div>
@@ -158,7 +160,7 @@ console.log('editor', editor);
 nextTick(() => editor.templates.setTemplate(templateListApi.productTypes[0]));
 
 // tabs
-const activeName = ref('bgColor');
+const activeName = ref('image');
 // text
 const { textTypeName, textAttrs, resetText, addText, editText } = useText(editor);
 // bgColor

@@ -270,7 +270,7 @@ export function listenStage(view, stage, editor) {
     // 判断是否点击了锚点
     if (isMouseTransformerAnchor(x, y)) return;
     // 获取当前坐标下的所有节点(设计节点)
-    const nodes = view.nodes.designGroup.children.filter((node) => {
+    const nodes = [...view.nodes.bgImageGroup.children, ...view.nodes.designGroup.children].filter((node) => {
       const design = view.designList.find((d) => d.uuid === node.attrs.uuid);
       return !isFixedDesignNode(design.node) && isDesignNode(design.node) && design.node?.intersects({ x, y });
     });

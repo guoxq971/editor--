@@ -1,4 +1,4 @@
-import { setNodeClipFunc } from './utils.canvas.clip';
+import { setNodeClipFunc } from './templates.canvas.clip';
 
 export function Modes(editor) {
   // 预览模式

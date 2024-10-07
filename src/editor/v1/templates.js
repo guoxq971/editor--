@@ -1,6 +1,6 @@
 import { nextTick } from 'vue';
 import { parseTemplateDetail } from './utils.template.parseTemplateDetail';
-import { drawView } from './utils.canvas.draw';
+import { drawView } from './templates.canvas.draw';
 
 export function Templates(editor) {
   // 设置模板
