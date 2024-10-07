@@ -1,6 +1,7 @@
 import Konva from 'konva';
 import lodash from 'lodash';
 import { nextTick } from 'vue';
+import { getTileOptions } from './designs.tile';
 
 export function Designs(editor) {
   // bgColor
@@ -11,7 +12,7 @@ export function Designs(editor) {
   this.editText = (design, attrs = {}, options = {}) => editText(editor, design, attrs, options);
 
   // image
-  this.addImage = () => addImage(editor);
+  this.addImage = (detail = {}, attrs = {}) => addImage(editor, detail, attrs);
 
   // bgImage
   this.addBgImage = () => addBgImage(editor);
@@ -86,8 +87,8 @@ async function addText(editor, attrs = {}, options = {}) {
   const uuid = editor.utils.uuid();
   attrs = Object.assign(
     {
-      x: 0,
-      y: 0,
+      x: view.width / 2,
+      y: view.height / 2,
       scaleX: 1,
       scaleY: 1,
       rotation: 0,
@@ -149,15 +150,21 @@ async function addText(editor, attrs = {}, options = {}) {
 }
 
 // 背景图
-async function addBgImage(editor) {
+async function addBgImage(editor, detail = {}, attrs = {}) {
   const activeView = editor.actives.view;
   const template = editor.actives.template;
+  detail = {
+    size: {
+      width: 4000,
+      height: 2000,
+    },
+  };
   for (const view of template.viewList) {
     const parent = view.nodes.bgImageGroup;
     const uuid = editor.utils.uuid();
     const attrs = {
-      x: 0,
-      y: 0,
+      x: view.width / 2,
+      y: view.height / 2,
       scaleX: 1,
       scaleY: 1,
       rotation: 0,
@@ -169,6 +176,8 @@ async function addBgImage(editor) {
       height: 100,
       offsetX: 50,
       offsetY: 50,
+      isTile: false,
+      tileAttrs: getTileOptions(),
     };
     const group = new Konva.Group({
       type: attrs.type,
@@ -190,6 +199,7 @@ async function addBgImage(editor) {
       template,
       group,
       node,
+      detail,
     };
     editor.designsOs.add(design);
 
@@ -201,14 +211,20 @@ async function addBgImage(editor) {
 }
 
 // 设计图
-async function addImage(editor) {
+async function addImage(editor, detail = {}, attrs = {}) {
   const view = editor.actives.view;
   const template = editor.actives.template;
   const parent = view.nodes.designGroup;
   const uuid = editor.utils.uuid();
-  const attrs = {
-    x: 0,
-    y: 0,
+  detail = {
+    size: {
+      width: 4000,
+      height: 2000,
+    },
+  };
+  attrs = {
+    x: view.width / 2,
+    y: view.height / 2,
     scaleX: 1,
     scaleY: 1,
     rotation: 0,
@@ -216,10 +232,14 @@ async function addImage(editor) {
     fill: '#' + Math.floor(Math.random() * 16777215).toString(16),
     type: editor.config.getKey('design/type/image'),
     uuid,
-    width: 100,
+    width: 200,
     height: 100,
-    offsetX: 50,
+    offsetX: 100,
     offsetY: 50,
+    fixed: editor.config.getKey('design/fixed/empty'),
+    isTile: false,
+    tileAttrs: getTileOptions(),
+    ...attrs,
   };
   const group = new Konva.Group({
     type: attrs.type,
@@ -228,8 +248,8 @@ async function addImage(editor) {
     y: 0,
   });
   const node = new Konva.Rect({
+    draggable: attrs.fixed !== editor.config.getKey('design/fixed/fixed'),
     ...attrs,
-    draggable: true,
   });
   group.add(node);
   parent.add(group);
@@ -241,6 +261,7 @@ async function addImage(editor) {
     template,
     group,
     node,
+    detail,
   };
   editor.designsOs.add(design);
 
@@ -248,6 +269,8 @@ async function addImage(editor) {
   editor.selector.select(design);
   // 监听
   listenDesign(editor, design);
+
+  return design;
 }
 
 // 设计监听
@@ -266,8 +289,34 @@ function listenDesign(editor, design) {
     // 右键
     const menu = [
       //
+      { label: '复制', fn: () => editor.designsOs.copy(design) },
       { label: '隐藏', fn: () => editor.designsOs.visible(design) },
+      { label: '固定', fn: () => editor.designsOs.fixed(design) },
       { label: '删除', fn: () => editor.designsOs.remove(design), labelStyle: { color: 'red' } },
+      {
+        label: '平铺',
+        children: [
+          { label: '不平铺', fn: () => editor.designsOs.tile(design, { noTile: true }) },
+          { label: '基础平铺', fn: () => editor.designsOs.tile(design, { mirrorType: editor.config.getKey('design/tile/mirror/normal') }) },
+          { label: '水平平铺', fn: () => editor.designsOs.tile(design, { mirrorType: editor.config.getKey('design/tile/mirror/x') }) },
+          { label: '垂直平铺', fn: () => editor.designsOs.tile(design, { mirrorType: editor.config.getKey('design/tile/mirror/y') }) },
+          { label: '旋转平铺', fn: () => editor.designsOs.tile(design, { mirrorType: editor.config.getKey('design/tile/mirror/xy') }) },
+        ],
+      },
+      {
+        label: '居中',
+        children: [
+          { label: '水平居中', fn: () => editor.designsOs.center(design, 'x') },
+          { label: '垂直居中', fn: () => editor.designsOs.center(design, 'y') },
+        ],
+      },
+      {
+        label: '最大化',
+        children: [
+          { label: '宽度最大化', fn: () => editor.designsOs.max(design, 'width') },
+          { label: '高度最大化', fn: () => editor.designsOs.max(design, 'height') },
+        ],
+      },
       {
         label: '翻转',
         children: [
@@ -305,8 +354,12 @@ function listenDesign(editor, design) {
   // 图 | 文字 | 背景图
   if ([editor.config.getKey('design/type/image'), editor.config.getKey('design/type/text'), editor.config.getKey('design/type/bgImage')].includes(design.attrs.type)) {
     node.on('mousedown', () => {
-      editor.modes.setEditMode();
-      editor.selector.select(node, view);
+      if (![editor.config.getKey('design/fixed/fixed')].includes(design.attrs.fixed)) {
+        editor.selector.select(node, view);
+        editor.modes.setEditMode();
+      } else {
+        editor.modes.toggleMode();
+      }
     });
   }
 
@@ -342,5 +395,14 @@ function listenDesign(editor, design) {
   else if ([editor.config.getKey('design/type/bgColor')].includes(design.attrs.type)) {
     node.on(`fillChange`, (e) => (design.attrs['fill'] = e.newVal));
     group.on('visibleChange', (e) => (design.attrs['visible'] = e.newVal));
+  }
+
+  // 平铺
+  if ([editor.config.getKey('design/type/image'), editor.config.getKey('design/type/bgImage')].includes(design.attrs.type)) {
+    design.node.on('updateTile', () => {
+      if (design.attrs.isTile) {
+        editor.designsOs.tile(design);
+      }
+    });
   }
 }

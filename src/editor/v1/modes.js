@@ -9,7 +9,7 @@ export function Modes(editor) {
     for (let view of template.viewList) {
       // 超出隐藏
       const print_d_node = view.nodes.staticLayer.findOne('#' + editor.config.getKey('id/canvas/print_d'))?.clone();
-      const targetNodes = [view.nodes.designGroup, view.nodes.bgColorGroup];
+      const targetNodes = [view.nodes.designGroup, view.nodes.bgColorGroup, view.nodes.bgImageGroup];
       targetNodes.forEach((node) => {
         // 全幅产品
         if (!view.print_d) {
@@ -33,7 +33,7 @@ export function Modes(editor) {
     for (let view of template.viewList) {
       // 超出隐藏
       const printout_d_node = view.nodes.staticLayer.findOne('#' + editor.config.getKey('id/canvas/printout_d'))?.clone();
-      const targetNodes = [view.nodes.designGroup, view.nodes.bgColorGroup];
+      const targetNodes = [view.nodes.designGroup, view.nodes.bgColorGroup, view.nodes.bgImageGroup];
       targetNodes.forEach((node) => {
         // 全幅产品
         if (!view.print_d) {

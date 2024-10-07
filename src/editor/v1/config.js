@@ -15,6 +15,7 @@ export function Config(editor) {
     'id/canvas/printout_v': 'printout_v',
     'id/canvas/transformer': 'transformer',
     'canvas/id/area': 'area',
+    'canvas/id/tile': 'tile',
 
     // design type
     'design/type/image': 'image',
@@ -30,6 +31,20 @@ export function Config(editor) {
     // canvas mode
     'canvas/mode/preview': 'preview',
     'canvas/mode/edit': 'edit',
+
+    // design attrs fixed
+    'design/fixed/fixed': 'fixed',
+    'design/fixed/none': 'none',
+    'design/fixed/empty': 'empty',
+
+    // design tile options
+    'design/tile/offset/none': '0',
+    'design/tile/offset/x': 'x',
+    'design/tile/offset/y': 'y',
+    'design/tile/mirror/none': '0',
+    'design/tile/mirror/x': 'x',
+    'design/tile/mirror/y': 'y',
+    'design/tile/mirror/xy': 'xy',
   };
 
   return {

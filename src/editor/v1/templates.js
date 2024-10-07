@@ -1,5 +1,5 @@
 import { nextTick } from 'vue';
-import { parseTemplateDetail } from './utils.template.parseTemplateDetail';
+import { parseTemplateDetail } from './templates.parseTemplateDetail';
 import { drawView } from './templates.canvas.draw';
 
 export function Templates(editor) {

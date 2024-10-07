@@ -69,10 +69,16 @@
           <template v-if="[editor.config.getKey('design/type/text'), editor.config.getKey('design/type/bgColor')].includes(design.attrs.type)">
             <div>fill：{{ design.attrs.fill }}</div>
           </template>
+          <!--平铺-->
+          <template v-if="[editor.config.getKey('design/type/bgImage'), editor.config.getKey('design/type/image')].includes(design.attrs.type)">
+            <div>isTile：{{ design.attrs.isTile }}</div>
+            <div>tileAttrs：{{ design.attrs.tileAttrs }}</div>
+          </template>
           <!--常规属性-->
           <div>x：{{ design.attrs.x }}</div>
           <div>y：{{ design.attrs.y }}</div>
           <div>rotation：{{ design.attrs.rotation }}</div>
+          <div>fixed：{{ design.attrs.fixed }}</div>
           <div>scale：{{ design.attrs.scaleX }}</div>
           <div>offsetX：{{ design.attrs.offsetX }}</div>
           <div>offsetY：{{ design.attrs.offsetY }}</div>
