@@ -46,6 +46,7 @@ function max(editor, design, type = '') {
   node.rotation(0);
   // 居中
   node.setAttrs({ x: width / 2, y: height / 2 });
+  editor.draw.draw(design);
 }
 
 // 居中
@@ -60,6 +61,7 @@ function center(editor, design, type = '') {
   if (type === 'y') y = design.view.height / 2;
   const node = design.node;
   node.setAttrs({ x, y });
+  editor.draw.draw(design);
 }
 
 // 复制
@@ -78,6 +80,7 @@ async function copy(editor, design) {
     attrs.y += 5;
     await editor.designs.addText(attrs);
   }
+  editor.draw.draw(design);
 }
 
 // 固定
@@ -111,6 +114,7 @@ function tile(editor, design, tileAttrs = {}) {
   } else {
     create();
   }
+  editor.draw.draw(design);
 }
 
 // 翻转
@@ -127,12 +131,14 @@ function flip(editor, design, type = 'x') {
     scaleX: Math.abs(design.attrs.scaleX) * x,
     scaleY: Math.abs(design.attrs.scaleY) * y,
   });
+  editor.draw.draw(design);
 }
 
 // 旋转
 function rotation(editor, design, deg) {
   design.node.rotation(deg);
   sortDesign(editor, design.template);
+  editor.draw.draw(design);
 }
 
 // 置顶
@@ -140,24 +146,28 @@ function moveToTop(editor, design) {
   let designs = [design];
   designs.forEach((d) => d.group.moveToTop());
   sortDesign(editor, design.template);
+  editor.draw.draw(design);
 }
 // 置底
 function moveToBottom(editor, design) {
   let designs = [design];
   designs.forEach((d) => d.group.moveToBottom());
   sortDesign(editor, design.template);
+  editor.draw.draw(design);
 }
 // 上移一层
 function moveUp(editor, design) {
   let designs = [design];
   designs.forEach((d) => d.group.moveUp());
   sortDesign(editor, design.template);
+  editor.draw.draw(design);
 }
 // 下移一层
 function moveDown(editor, design) {
   let designs = [design];
   designs.forEach((d) => d.group.moveDown());
   sortDesign(editor, design.template);
+  editor.draw.draw(design);
 }
 
 // 显示隐藏
@@ -176,6 +186,7 @@ function visible(editor, design, _v) {
     design.group.visible(v);
     !v && editor.selector.ifsoDeselect(design);
     v && editor.selector.select(design);
+    editor.draw.draw(design);
   }
 }
 
@@ -194,6 +205,7 @@ function remove(editor, design) {
     editor.selector.ifsoDeselect(design);
     design.group.destroy();
     design.view.designList = design.view.designList.filter((d) => d.uuid !== design.uuid);
+    editor.draw.draw(design);
   }
 }
 
@@ -202,6 +214,7 @@ function addDesign(editor, design) {
   const view = design.view;
   view.designList.push(design);
   sortDesign(editor, design.template);
+  editor.draw.draw(design);
 }
 
 // 设计排序

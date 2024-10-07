@@ -5,9 +5,12 @@ import { drawView } from './templates.canvas.draw';
 export function Templates(editor) {
   // 设置模板
   this.setTemplate = (detail) => setTemplate(editor, detail);
-
   // 使用模板
-  this.useTemplate = (template) => useTemplateList(editor, template);
+  this.useTemplate = (template) => useTemplate(editor, template);
+  // 设置模板类型
+  this.setTemplateType = (type) => {};
+  // 设置视图
+  this.setView = (view) => {};
 }
 
 // 设置模板
@@ -36,6 +39,7 @@ async function setTemplate(editor, detail) {
     const isCommon = templateConfig.isCommon;
     const isRefine = templateConfig.isRefine;
     const template = {
+      typeName: isCommon ? '通用设计' : '精细设计',
       uuid: editor.utils.uuid(),
       config: templateConfig,
       config3d: isCommon ? templateConfig : null,
@@ -61,7 +65,7 @@ async function setTemplate(editor, detail) {
 }
 
 // 使用模板
-async function useTemplateList(editor, template) {
+async function useTemplate(editor, template) {
   // 详情
   if (!template.detail) {
     if (template.config.isCommon) {

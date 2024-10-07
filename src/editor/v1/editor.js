@@ -9,10 +9,15 @@ import { Designs } from './designs';
 import { computed } from 'vue';
 import { ContextMenu } from './ContextMenu';
 import { DesignsOs } from './designs.os';
+import { Draw } from './draw';
 
 export function Editor() {
   this.templateList = [];
   this.templateInfo = {
+    disabled: {
+      common: true,
+      refine: true,
+    },
     price: {},
     craft: {},
     reset() {
@@ -58,4 +63,6 @@ export function Editor() {
   this.designsOs = new DesignsOs(this);
   // 右键菜单
   this.contextMenu = new ContextMenu(this);
+  // 更新画布
+  this.draw = new Draw(this);
 }

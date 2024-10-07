@@ -1,6 +1,7 @@
 export function Config(editor) {
   const baseSize = 500;
   const targetSize = 650;
+  const previewSize = 90;
 
   const keys = {
     // container id
@@ -45,6 +46,15 @@ export function Config(editor) {
     'design/tile/mirror/x': 'x',
     'design/tile/mirror/y': 'y',
     'design/tile/mirror/xy': 'xy',
+
+    // template type
+    'template/type/common': 'common',
+    'template/type/refine': 'refine',
+
+    // preview style
+    'style/preview/size': previewSize,
+    'id/preview/canvas/fn': (view_uuid) => `preview_canvas_${view_uuid}`,
+    'preview/scale': previewSize / baseSize,
   };
 
   return {

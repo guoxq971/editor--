@@ -217,6 +217,8 @@ async function addImage(editor, detail = {}, attrs = {}) {
   const parent = view.nodes.designGroup;
   const uuid = editor.utils.uuid();
   detail = {
+    id: '1',
+    name: '测试1',
     size: {
       width: 4000,
       height: 2000,
@@ -368,33 +370,42 @@ function listenDesign(editor, design) {
   if ([editor.config.getKey('design/type/image'), editor.config.getKey('design/type/bgImage')].includes(design.attrs.type)) {
     const fields = ['x', 'y', 'scaleX', 'scaleY', 'rotation', 'offsetX', 'offsetY'];
     fields.forEach((field) => {
-      node.on(`${field}Change`, (e) => (design.attrs[field] = lodash.round(e.newVal, 2)));
+      node.on(`${field}Change`, (e) => {
+        design.attrs[field] = lodash.round(e.newVal, 2);
+        editor.draw.draw(design);
+      });
     });
     group.on('visibleChange', (e) => (design.attrs['visible'] = e.newVal));
-  }
-  // 文本
-  else if ([editor.config.getKey('design/type/text')].includes(design.attrs.type)) {
+  } else if ([editor.config.getKey('design/type/text')].includes(design.attrs.type)) {
     const fields = ['x', 'y', 'scaleX', 'scaleY', 'rotation', 'fontSize', 'offsetX', 'offsetY'];
     fields.forEach((field) => {
-      node.on(`${field}Change`, (e) => (design.attrs[field] = lodash.round(e.newVal, 2)));
+      node.on(`${field}Change`, (e) => {
+        design.attrs[field] = lodash.round(e.newVal, 2);
+        editor.draw.draw(design);
+      });
     });
-
     const fields2 = ['textDecoration', 'fill'];
     fields2.forEach((field) => {
-      node.on(`${field}Change`, (e) => (design.attrs[field] = e.newVal));
+      node.on(`${field}Change`, (e) => {
+        design.attrs[field] = e.newVal;
+        editor.draw.draw(design);
+      });
     });
     node.on(`fontStyleChange`, (e) => {
       design.attrs['fontStyle'] = e.newVal;
       const l = e.newVal.split(' ');
       design.attrs['fontWeight'] = l[0];
       design.attrs['fontItalic'] = l[1];
+      editor.draw.draw(design);
     });
-    group.on('visibleChange', (e) => (design.attrs['visible'] = e.newVal));
-  }
-  // 背景色
-  else if ([editor.config.getKey('design/type/bgColor')].includes(design.attrs.type)) {
+    group.on('visibleChange', (e) => {
+      design.attrs['visible'] = e.newVal;
+      editor.draw.draw(design);
+    });
+  } else if ([editor.config.getKey('design/type/bgColor')].includes(design.attrs.type)) {
     node.on(`fillChange`, (e) => (design.attrs['fill'] = e.newVal));
     group.on('visibleChange', (e) => (design.attrs['visible'] = e.newVal));
+    editor.draw.draw(design);
   }
 
   // 平铺
@@ -402,6 +413,7 @@ function listenDesign(editor, design) {
     design.node.on('updateTile', () => {
       if (design.attrs.isTile) {
         editor.designsOs.tile(design);
+        editor.draw.draw(design);
       }
     });
   }

@@ -1,38 +1,12 @@
 <template>
   <div style="display: flex">
-    <div>
+    <div v-if="false">
       <!--模板列表-->
       <div v-for="item in templateListApi.productTypes" class="box">{{ item.templateName }}({{ item.id }})</div>
     </div>
 
     <!--工作台-->
-    <div :id="editor.config.getKey('id/workspace')" class="workspace">
-      <img
-        v-show="editor.isShow2d"
-        src=""
-        :style="{
-          position: 'absolute',
-          'pointer-events': 'none',
-          left: editor.container.templateBbox.left + 'px',
-          top: editor.container.templateBbox.top + 'px',
-          width: editor.container.templateBbox.width + 'px',
-          height: editor.container.templateBbox.height + 'px',
-        }"
-      />
-      <div v-for="view in editor.actives.template?.viewList" :key="`view_${view.uuid}`" :id="view.uuid"></div>
-      <img
-        v-show="editor.isShow2d"
-        src=""
-        :style="{
-          position: 'absolute',
-          'pointer-events': 'none',
-          left: editor.container.templateBbox.left + 'px',
-          top: editor.container.templateBbox.top + 'px',
-          width: editor.container.templateBbox.width + 'px',
-          height: editor.container.templateBbox.height + 'px',
-        }"
-      />
-    </div>
+    <workspace style="width: 1000px; height: 800px" />
 
     <!--操作-->
     <div>
@@ -148,22 +122,21 @@
         </el-tabs>
       </div>
     </div>
-
-    <!--右键菜单-->
-    <ContextMenu />
   </div>
 </template>
 
 <script setup>
-import ContextMenu from './lib/contextMenu';
 import { editor } from './index.js';
 import { templateListApi } from './mock/templateList';
-import { computed, nextTick, ref, watch } from 'vue';
+import { computed, nextTick, onMounted, ref, watch } from 'vue';
 import { Message } from 'element-ui';
 import lodash from 'lodash';
+import workspace from './v1/workspace.vue';
 // 设计器
 console.log('editor', editor);
-nextTick(() => editor.templates.setTemplate(templateListApi.productTypes[0]));
+onMounted(() => {
+  nextTick(() => editor.templates.setTemplate(templateListApi.productTypes[0]));
+});
 
 // tabs
 const activeName = ref('image');
