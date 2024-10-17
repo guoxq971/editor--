@@ -7,6 +7,7 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "hotkeys-js": "^3.9.4",
     "@vueuse/core": "^11.1.0",
     "core-js": "^3.8.3",
     "element-ui": "^2.15.14",

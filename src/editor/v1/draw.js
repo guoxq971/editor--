@@ -1,7 +1,7 @@
 import { useDebounceFn } from '@vueuse/core';
 
 export function Draw(editor) {
-  const fn = useDebounceFn((design) => draw(editor, design), 500);
+  const fn = useDebounceFn((design) => draw(editor, design), 200);
   this.draw = (design) => fn(design);
 }
 

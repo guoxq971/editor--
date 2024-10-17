@@ -1,0 +1,510 @@
+{
+  "id": "10219",
+  "name": "10219-长方形浴室地垫GZ-10219",
+  "cnName": "10219||长方形浴室地垫",
+  "shortDescription": "",
+  "description": "",
+  "brand": "",
+  "defaultValues": {
+    "defaultView": {
+      "id": 1
+    },
+    "defaultAppearance": {
+      "id": 1
+    }
+  },
+  "views": [
+    {
+      "id": "1",
+      "name": "正面",
+      "viewType": 0,
+      "size": {
+        "width": "500",
+        "height": "500",
+        "unit": "mm"
+      },
+      "perspective": "正面",
+      "viewMaps": [
+        {
+          "printArea": {
+            "id": "1"
+          },
+          "offset": {
+            "x": 9.31,
+            "y": 85.53,
+            "unit": "mm"
+          }
+        }
+      ]
+    }
+  ],
+  "appearances": [
+    {
+      "id": "1",
+      "name": "white",
+      "views": [
+        {
+          "id": "1",
+          "name": "正面",
+          "thumbImg": "http://php.testcustomwe.com/desg_fn//10219/renderings_white_500.png?v=20241016155250",
+          "image": "http://php.testcustomwe.com/desg_fn//10219/background_white_500.png?v=20241016155250",
+          "texture": "http://php.testcustomwe.com/desg_fn//10219/public_texture_white_500.png?v=20241016155250"
+        }
+      ],
+      "colors": [
+        {
+          "index": 0,
+          "value": "#FFFFFF"
+        }
+      ],
+      "multiAngleImages": [
+        {
+          "image": "http://php.testcustomwe.com/desg_fn//10219/background_white_positive_500.png?v=20241016155250",
+          "multiId": "1",
+          "isMirror": "",
+          "color": "",
+          "frontImage": "",
+          "svg": "",
+          "svgCode": "",
+          "backgroundImage": "",
+          "isMain": "1",
+          "texture": "http://php.testcustomwe.com/desg_fn//10219/public_texture_white_positive_500.png?v=20241016155250",
+          "groupId": "",
+          "template_number_with_size_code": "",
+          "sortno": 1,
+          "viewId": "1",
+          "sortId": "",
+          "parts": [
+            {
+              "isMirror": "",
+              "svgCode": "",
+              "xyMirrorList": [],
+              "xyList": [
+                {
+                  "x": 0,
+                  "y": 0
+                },
+                {
+                  "x": 600,
+                  "y": 0
+                },
+                {
+                  "x": 600,
+                  "y": 600
+                },
+                {
+                  "x": 0,
+                  "y": 600
+                }
+              ]
+            }
+          ],
+          "composeId": "",
+          "mask": "http://php.testcustomwe.com/desg_fn//10219/mask_white_positive_500.png?v=20241016155250"
+        },
+        {
+          "image": "http://php.testcustomwe.com/desg_fn//10219/background_white_bevel_500.png?v=20241016155250",
+          "multiId": "2",
+          "isMirror": "",
+          "color": "",
+          "frontImage": "",
+          "svg": "",
+          "svgCode": "",
+          "backgroundImage": "",
+          "isMain": "",
+          "texture": "http://php.testcustomwe.com/desg_fn//10219/public_texture_white_bevel_500.png?v=20241016155250",
+          "groupId": "",
+          "template_number_with_size_code": "",
+          "sortno": 2,
+          "viewId": "1",
+          "sortId": "",
+          "parts": [
+            {
+              "isMirror": "",
+              "svgCode": "",
+              "xyMirrorList": [],
+              "xyList": [
+                {
+                  "x": -60.508,
+                  "y": 415.417
+                },
+                {
+                  "x": 261.688,
+                  "y": 256.901
+                },
+                {
+                  "x": 649.353,
+                  "y": 393.979
+                },
+                {
+                  "x": 373.247,
+                  "y": 629.81
+                }
+              ]
+            }
+          ],
+          "composeId": "",
+          "mask": "http://php.testcustomwe.com/desg_fn//10219/mask_white_bevel_500.png?v=20241016155250"
+        },
+        {
+          "image": "http://php.testcustomwe.com/desg_fn//10219/background_white_scene_500.png?v=20241016155250",
+          "multiId": "3",
+          "isMirror": "",
+          "color": "",
+          "frontImage": "",
+          "svg": "",
+          "svgCode": "",
+          "backgroundImage": "",
+          "isMain": "",
+          "texture": "http://php.testcustomwe.com/desg_fn//10219/public_texture_white_scene_500.png?v=20241016155250",
+          "groupId": "",
+          "template_number_with_size_code": "",
+          "sortno": 3,
+          "viewId": "1",
+          "sortId": "",
+          "parts": [
+            {
+              "isMirror": "",
+              "svgCode": "",
+              "xyMirrorList": [],
+              "xyList": [
+                {
+                  "x": 83.208,
+                  "y": 265.492
+                },
+                {
+                  "x": 489.911,
+                  "y": 264.184
+                },
+                {
+                  "x": 579.134,
+                  "y": 606.428
+                },
+                {
+                  "x": 15.095,
+                  "y": 606.229
+                }
+              ]
+            }
+          ],
+          "composeId": "",
+          "mask": "http://php.testcustomwe.com/desg_fn//10219/mask_white_scene_500.png?v=20241016155250"
+        },
+        {
+          "image": "http://php.testcustomwe.com/desg_fn//10219/background_white_size_500.png?v=20241016155250",
+          "multiId": "4",
+          "isMirror": "",
+          "color": "",
+          "frontImage": "",
+          "svg": "",
+          "svgCode": "",
+          "backgroundImage": "",
+          "isMain": "",
+          "texture": "http://php.testcustomwe.com/desg_fn//10219/public_texture_white_size_500.png?v=20241016155250",
+          "groupId": "",
+          "template_number_with_size_code": "",
+          "sortno": 4,
+          "viewId": "1",
+          "sortId": "",
+          "parts": [
+            {
+              "isMirror": "",
+              "svgCode": "",
+              "xyMirrorList": [],
+              "xyList": [
+                {
+                  "x": 52.65,
+                  "y": 6.45
+                },
+                {
+                  "x": 569.85,
+                  "y": 6.45
+                },
+                {
+                  "x": 569.85,
+                  "y": 523.65
+                },
+                {
+                  "x": 52.65,
+                  "y": 523.65
+                }
+              ]
+            }
+          ],
+          "composeId": "",
+          "mask": "http://php.testcustomwe.com/desg_fn//10219/mask_white_size_500.png?v=20241016155250"
+        },
+        {
+          "image": "http://php.testcustomwe.com/desg_fn//10219/background_white_detail_500.png?v=20241016155250",
+          "multiId": "5",
+          "isMirror": "",
+          "color": "",
+          "frontImage": "",
+          "svg": "",
+          "svgCode": "",
+          "backgroundImage": "",
+          "isMain": "",
+          "texture": "http://php.testcustomwe.com/desg_fn//10219/public_texture_white_detail_500.png?v=20241016155250",
+          "groupId": "",
+          "template_number_with_size_code": "",
+          "sortno": 5,
+          "viewId": "1",
+          "sortId": "",
+          "parts": [
+            {
+              "isMirror": "",
+              "svgCode": "",
+              "xyMirrorList": [],
+              "xyList": [
+                {
+                  "x": 332.423,
+                  "y": -180.739
+                },
+                {
+                  "x": 905.107,
+                  "y": 60.52
+                },
+                {
+                  "x": 446.849,
+                  "y": 586.122
+                },
+                {
+                  "x": -142.203,
+                  "y": 176.04
+                }
+              ]
+            }
+          ],
+          "composeId": "",
+          "mask": "http://php.testcustomwe.com/desg_fn//10219/mask_white_detail_500.png?v=20241016155250"
+        }
+      ],
+      "multiAngleImages4Compose": []
+    }
+  ],
+  "sizes": [
+    {
+      "id": 1,
+      "sizeType": "MD",
+      "name": "16x24in",
+      "measures": [
+        {
+          "name": "A",
+          "value": {
+            "value": "",
+            "unit": "mm"
+          }
+        },
+        {
+          "name": "B",
+          "value": {
+            "value": "",
+            "unit": "mm"
+          }
+        },
+        {
+          "name": "C",
+          "value": {
+            "value": "",
+            "unit": "mm"
+          }
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "sizeType": "MD",
+      "name": "17x27in",
+      "measures": [
+        {
+          "name": "A",
+          "value": {
+            "value": "",
+            "unit": "mm"
+          }
+        },
+        {
+          "name": "B",
+          "value": {
+            "value": "",
+            "unit": "mm"
+          }
+        },
+        {
+          "name": "C",
+          "value": {
+            "value": "",
+            "unit": "mm"
+          }
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "sizeType": "MD",
+      "name": "20x32in",
+      "measures": [
+        {
+          "name": "A",
+          "value": {
+            "value": "",
+            "unit": "mm"
+          }
+        },
+        {
+          "name": "B",
+          "value": {
+            "value": "",
+            "unit": "mm"
+          }
+        },
+        {
+          "name": "C",
+          "value": {
+            "value": "",
+            "unit": "mm"
+          }
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "sizeType": "MD",
+      "name": "20x48in",
+      "measures": [
+        {
+          "name": "A",
+          "value": {
+            "value": "",
+            "unit": "mm"
+          }
+        },
+        {
+          "name": "B",
+          "value": {
+            "value": "",
+            "unit": "mm"
+          }
+        },
+        {
+          "name": "C",
+          "value": {
+            "value": "",
+            "unit": "mm"
+          }
+        }
+      ]
+    }
+  ],
+  "dpi": 120,
+  "designWidth": "100",
+  "designHeight": "0",
+  "printAreas": [
+    {
+      "id": "1",
+      "appearanceColorIndex": 0,
+      "defaultView": {
+        "id": "1"
+      },
+      "restrictions": {
+        "textAllowed": true,
+        "designAllowed": true,
+        "excludedPrintTypes": []
+      },
+      "boundary": {
+        "size": {
+          "width": 481.37,
+          "height": 328.9,
+          "unit": "mm"
+        },
+        "hard": {
+          "content": {
+            "svg": {
+              "rect": {
+                "width": 481.37,
+                "height": 328.9,
+                "x": "0",
+                "y": "0"
+              }
+            },
+            "unit": "mm"
+          }
+        },
+        "soft": {
+          "content": {
+            "unit": "mm",
+            "svg": {
+              "path": {
+                "d": "M35.443,7.91c103.68,0,207.391,0,311.071,0c24.454,0,48.916,0,73.37,0c8.974,0,22.597-1.193,30.139,0.682\n\t\t\tc5.65,1.405,9.88,4.095,13.774,7.228c12.054,9.7,9.956,28.457,9.955,49.913c0,39.045,0,78.101,0,117.146c0,28,0,56.007,0,84.007\n\t\t\tc0.001,17.196,1.524,31.357-5.728,41.594c-10.164,14.348-24.105,12.683-47.868,12.683c-18.045,0-36.096,0-54.141,0\n\t\t\tc-88.226,0-176.478,0-264.704,0c-15.682,0-31.368,0-47.049,0c-8.124,0-18.068,0.876-24.548-1.091\n\t\t\tc-9.326-2.831-16.312-9.299-19.911-17.865c-2.751-6.549-2.182-16.663-2.182-26.048c0-15.772,0-31.55,0-47.322\n\t\t\tc0-48.181,0-96.376,0-144.557c0-9.954,0-19.912,0-29.866c0-11.775-0.581-23.389,3.682-30.684\n\t\t\tc3.614-6.184,8.929-11.156,15.956-13.91C29.727,8.853,32.794,9.002,35.443,7.91z"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "pointoutPrintAreas": [
+    {
+      "id": "1",
+      "appearanceColorIndex": 0,
+      "defaultView": {
+        "id": "1"
+      },
+      "size": {
+        "height": 500,
+        "width": 500,
+        "x": 9.31,
+        "y": 85.53,
+        "unit": "mm"
+      },
+      "soft": {
+        "unit": "mm",
+        "d": "M0,0h481.375v328.906H0V0z",
+        "v": "M36.504,7.655c103.359,0,206.748,0,310.107,0c24.018,0,48.043,0,72.061,0c6.166,0,12.334,0,18.5,0\n\t\t\tc4.614-0.001,9.338-0.159,13.002,0.777c5.894,1.506,9.925,4.315,13.972,7.577c4.386,3.534,7.618,10.128,9.056,16.643\n\t\t\tc0.747,3.384,0.453,7.839,0.453,11.851c0,6.842,0,13.686,0,20.529c0,39.132,0,78.276,0,117.408c0,28.275,0,56.559,0,84.834\n\t\t\tc0,6,0,12.003,0,18.003c0,3.433,0.273,7.26-0.323,10.232c-0.993,4.945-2.598,9.084-5.046,12.563\n\t\t\tc-4.185,5.949-10.114,10.372-18.177,12.434c-3.65,0.933-8.344,0.777-12.937,0.777c-6.08,0-12.162,0-18.242,0\n\t\t\tc-17.571,0-35.148,0-52.72,0c-88.18,0-176.387,0-264.568,0c-15.674,0-31.353,0-47.027,0c-4.075,0-8.151,0-12.226,0\n\t\t\tc-4.41,0.001-8.587,0.041-11.967-0.971c-9.891-2.963-16.752-9.108-20.57-18.133c-2.771-6.551-2.199-16.748-2.199-26.163\n\t\t\tc0-15.972,0-31.949,0-47.922c0-48.046,0-96.107,0-144.153c0-11.871,0-23.746,0-35.617c-0.001-10.252-0.218-18.005,3.558-24.479\n\t\t\tc3.85-6.6,8.997-11.425,16.495-14.376c1.767-0.695,3.753-1.086,5.757-1.489C34.478,7.871,35.491,7.763,36.504,7.655z"
+      }
+    }
+  ],
+  "amType": "",
+  "imgFull": "0",
+  "hasDetail": false,
+  "seqId": "b8545a89-e482-4b63-a9ea-d7808015928c",
+  "templateNameShow": "10219-长方形浴室地垫GZ-10219",
+  "templateNo": "10219",
+  "templateName": "长方形浴室地垫",
+  "templateModel": "GZ-10219",
+  "isHotStamping": 0,
+  "secondCalculateNum": 20,
+  "thirdCalculateNum": 100,
+  "templateType": "0",
+  "collectFlag": false,
+  "collectId": "",
+  "configDesign": {
+    "templateNo": "10219",
+    "factoryProductionDocuments": "",
+    "recommendDpi": 0,
+    "resetPrintStatus": 0,
+    "templateId": "",
+    "version": "",
+    "borderSet": 1,
+    "recommendWidth": 0,
+    "createTime": {
+      "date": 11,
+      "hours": 17,
+      "seconds": 2,
+      "month": 9,
+      "timezoneOffset": -480,
+      "year": 124,
+      "minutes": 39,
+      "time": 1728639542000,
+      "day": 5
+    },
+    "recommendHeight": 0,
+    "cutFlag": 0,
+    "dpi": 150,
+    "seqId": "c21b511c-c731-46f6-8cde-cf0d15f1f090",
+    "addWhiteBorder": 0
+  },
+  "isCanSynthesis": false,
+  "3dAngleList": [],
+  "templateImages": []
+}

@@ -10,6 +10,8 @@ import { computed } from 'vue';
 import { ContextMenu } from './ContextMenu';
 import { DesignsOs } from './designs.os';
 import { Draw } from './draw';
+import { Hotkeys } from './hotkeys';
+import { ColorPicker } from './colorPicker';
 
 export function Editor() {
   this.templateList = [];
@@ -65,4 +67,8 @@ export function Editor() {
   this.contextMenu = new ContextMenu(this);
   // 更新画布
   this.draw = new Draw(this);
+  // 快捷键
+  this.hotkeys = new Hotkeys(this);
+  // 颜色选择器
+  this.colorPicker = new ColorPicker(this);
 }
